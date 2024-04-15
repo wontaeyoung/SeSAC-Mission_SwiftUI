@@ -11,6 +11,9 @@
 		6E8C9F142BCCF6870086F913 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C9F132BCCF6870086F913 /* ContentView.swift */; };
 		6E8C9F162BCCF6890086F913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E8C9F152BCCF6890086F913 /* Assets.xcassets */; };
 		6E8C9F192BCCF6890086F913 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E8C9F182BCCF6890086F913 /* Preview Assets.xcassets */; };
+		6E8C9F222BCCF7280086F913 /* RecommendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C9F212BCCF7280086F913 /* RecommendView.swift */; };
+		6E8C9F242BCD02150086F913 /* OXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C9F232BCD02150086F913 /* OXView.swift */; };
+		6E8C9F262BCD02200086F913 /* ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C9F252BCD02200086F913 /* ViewModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		6E8C9F132BCCF6870086F913 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6E8C9F152BCCF6890086F913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E8C9F182BCCF6890086F913 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6E8C9F212BCCF7280086F913 /* RecommendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendView.swift; sourceTree = "<group>"; };
+		6E8C9F232BCD02150086F913 /* OXView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OXView.swift; sourceTree = "<group>"; };
+		6E8C9F252BCD02200086F913 /* ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +59,9 @@
 			children = (
 				6E8C9F112BCCF6870086F913 /* SeSAC_Mission_SwiftUIApp.swift */,
 				6E8C9F132BCCF6870086F913 /* ContentView.swift */,
+				6E8C9F212BCCF7280086F913 /* RecommendView.swift */,
+				6E8C9F232BCD02150086F913 /* OXView.swift */,
+				6E8C9F252BCD02200086F913 /* ViewModifier.swift */,
 				6E8C9F152BCCF6890086F913 /* Assets.xcassets */,
 				6E8C9F172BCCF6890086F913 /* Preview Content */,
 			);
@@ -138,6 +147,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E8C9F142BCCF6870086F913 /* ContentView.swift in Sources */,
+				6E8C9F242BCD02150086F913 /* OXView.swift in Sources */,
+				6E8C9F222BCCF7280086F913 /* RecommendView.swift in Sources */,
+				6E8C9F262BCD02200086F913 /* ViewModifier.swift in Sources */,
 				6E8C9F122BCCF6870086F913 /* SeSAC_Mission_SwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

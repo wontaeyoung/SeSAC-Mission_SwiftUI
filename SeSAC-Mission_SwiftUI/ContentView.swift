@@ -8,17 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+  
+  var body: some View {
+    NavigationStack {
+      VStack(spacing: 40) {
+        NavigationLink("포인트 혜택 추천 뷰") {
+          RecommendView()
         }
-        .padding()
+        .modifier(PrimaryButton())
+        
+        NavigationLink("OX 퀴즈 뷰") {
+          OXView()
+        }
+        .modifier(PrimaryButton())
+      }
+      .padding()
     }
+  }
 }
 
 #Preview {
-    ContentView()
+  ContentView()
+    .preferredColorScheme(.dark)
 }
