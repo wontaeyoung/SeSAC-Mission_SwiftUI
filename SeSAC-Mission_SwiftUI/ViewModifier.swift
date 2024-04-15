@@ -46,3 +46,14 @@ struct LabelImage: ViewModifier {
       .font(.title2)
   }
 }
+
+struct CellModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .bold()
+      .padding()
+      .frame(maxWidth: .infinity)
+      .background(.gray.opacity(0.25))
+      .cornerRadius(15)
+  }
+}
