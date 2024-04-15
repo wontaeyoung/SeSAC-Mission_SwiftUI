@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct SeSAC_Mission_SwiftUIApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
+        .preferredColorScheme(.dark)
     }
+  }
 }
