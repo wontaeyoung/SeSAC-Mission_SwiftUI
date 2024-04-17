@@ -57,3 +57,26 @@ struct CellModifier: ViewModifier {
       .cornerRadius(15)
   }
 }
+
+struct BorderStyleModifier: ViewModifier {
+  
+  func body(content: Content) -> some View {
+    content
+      .asPrimaryStyle()
+      .padding(10)
+      .overlay(
+        RoundedRectangle(cornerRadius: 8)
+          .stroke(.tamagotchiPrimary, lineWidth: 1.5)
+      )
+  }
+}
+
+struct PrimaryStyleModifier: ViewModifier {
+  
+  func body(content: Content) -> some View {
+    content
+      .font(.title3)
+      .bold()
+      .foregroundStyle(.tamagotchiPrimary)
+  }
+}
