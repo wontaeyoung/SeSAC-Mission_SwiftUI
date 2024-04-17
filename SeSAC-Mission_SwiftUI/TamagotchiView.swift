@@ -10,27 +10,43 @@ import SwiftUI
 struct TamagotchiView: View {
   
   @State private var level: Int = 1
-  @State private var grain: Int = 1
-  @State private var waterDrop: Int = 1
+  @State private var grain: Int = 1 {
+    didSet {
+      calculateLevel(value: grain, feedCase: .grain)
+    }
+  }
+  
+  @State private var waterDrop: Int = 1 {
+    didSet {
+      calculateLevel(value: waterDrop, feedCase: .water)
+    }
+  }
+  
   @State private var feedResultText: String = "다마고치에게 먹이를 주세요 ^-^"
   @FocusState private var isFocuesed: Bool
   
   var tamagotchiInfoView: some View {
+    VStack(spacing: 20) {
+      Text("방실방실 다마고치")
+        .asBorderStyle()
+      
+      Text("LV \(level) · \(FeedCase.grain.name) \(grain)개 · \(FeedCase.water.name) \(waterDrop)개")
+        .asPrimaryStyle()
+      
+      Text(feedResultText)
+        .asPrimaryStyle()
+    }
+  }
+  
+  var body: some View {
     ZStack {
       VStack(spacing: 40) {
-        Text("방실방실 다마고치")
-          .asBorderStyle()
+        tamagotchiInfoView
         
-        Text("LV\(level) · \(FeedCase.grain.name) \(grain)개 · \(FeedCase.water.name) \(waterDrop)개")
-          .asPrimaryStyle()
-        
-        Text(feedResultText)
-          .asPrimaryStyle()
-        
-        FeedView(feedCase: .grain, count: $grain, feedResultText: $feedResultText)
+        FeedView(feedCase: .grain, level: $level, count: $grain, feedResultText: $feedResultText)
           .focused($isFocuesed)
         
-        FeedView(feedCase: .water, count: $waterDrop, feedResultText: $feedResultText)
+        FeedView(feedCase: .water, level: $level, count: $waterDrop, feedResultText: $feedResultText)
           .focused($isFocuesed)
       }
     }
@@ -42,9 +58,21 @@ struct TamagotchiView: View {
     }
   }
   
-  var body: some View {
-    VStack {
-      tamagotchiInfoView
+  private func calculateLevel(value: Int, feedCase: FeedCase) {
+    
+    if value >= feedCase.levelUpRequired {
+      let newLevel = value / feedCase.levelUpRequired
+      let remainValue = value % feedCase.levelUpRequired
+      
+      level += newLevel
+      feedResultText = "레벨이 \(newLevel) 올랐어요!"
+      
+      switch feedCase {
+        case .grain:
+        grain = remainValue
+        case .water:
+          waterDrop = remainValue
+      }
     }
   }
 }
@@ -54,6 +82,7 @@ fileprivate struct FeedView: View {
   let feedCase: FeedCase
   
   @State private var input: String = ""
+  @Binding var level: Int
   @Binding var count: Int
   @Binding var feedResultText: String
   
@@ -62,7 +91,6 @@ fileprivate struct FeedView: View {
       TextField(feedCase.placeholder, text: $input)
         .autocorrectionDisabled()
         .textInputAutocapitalization(.never)
-        
         .asPrimaryStyle()
         .overlay(alignment: .bottom) {
           Rectangle()
@@ -73,6 +101,7 @@ fileprivate struct FeedView: View {
       
       Button(feedCase.actionText, systemImage: feedCase.actionIcon) {
         feed()
+        calculateLevel(value: count, feedCase: feedCase)
       }
       .asBorderStyle()
     }
@@ -106,6 +135,18 @@ fileprivate struct FeedView: View {
   
   private func clearField() {
     input = ""
+  }
+  
+  private func calculateLevel(value: Int, feedCase: FeedCase) {
+    
+    if value >= feedCase.levelUpRequired {
+      let newLevel = value / feedCase.levelUpRequired
+      let remainValue = value % feedCase.levelUpRequired
+      
+      level += newLevel
+      count = remainValue
+      feedResultText = "레벨이 \(newLevel) 올랐어요!"
+    }
   }
 }
 
@@ -142,6 +183,13 @@ fileprivate enum FeedCase: String {
     switch self {
       case .grain: 99
       case .water: 49
+    }
+  }
+  
+  var levelUpRequired: Int {
+    switch self {
+      case .grain: 20
+      case .water: 10
     }
   }
 }
