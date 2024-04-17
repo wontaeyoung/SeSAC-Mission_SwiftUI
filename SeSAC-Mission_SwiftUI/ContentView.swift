@@ -21,6 +21,11 @@ struct ContentView: View {
           OXView()
         }
         .modifier(PrimaryButton())
+        
+        NavigationLink("다마고치 키우기 뷰") {
+          TamagotchiView()
+        }
+        .modifier(PrimaryButton())
       }
       .padding()
     }
