@@ -13,6 +13,7 @@ struct TamagotchiView: View {
   @State private var grain: Int = 1
   @State private var waterDrop: Int = 1
   @State private var feedResultText: String = "다마고치에게 먹이를 주세요 ^-^"
+  @FocusState private var isFocuesed: Bool
   
   var tamagotchiInfoView: some View {
     ZStack {
@@ -27,12 +28,18 @@ struct TamagotchiView: View {
           .asPrimaryStyle()
         
         FeedView(feedCase: .grain, count: $grain, feedResultText: $feedResultText)
+          .focused($isFocuesed)
+        
         FeedView(feedCase: .water, count: $waterDrop, feedResultText: $feedResultText)
+          .focused($isFocuesed)
       }
     }
     .ignoresSafeArea()
     .frame(maxHeight: .infinity)
     .background(.tamagotchiBackground)
+    .onTapGesture {
+      isFocuesed = false
+    }
   }
   
   var body: some View {
@@ -53,6 +60,9 @@ fileprivate struct FeedView: View {
   var body: some View {
     HStack(spacing: 20) {
       TextField(feedCase.placeholder, text: $input)
+        .autocorrectionDisabled()
+        .textInputAutocapitalization(.never)
+        
         .asPrimaryStyle()
         .overlay(alignment: .bottom) {
           Rectangle()
@@ -73,8 +83,10 @@ fileprivate struct FeedView: View {
     defer { clearField() }
     
     guard !input.isEmpty else {
-      count += 1
-      feedResultText = "\(feedCase.name)을 1개 먹였어요!"
+      let defaultFeedValue: Int = 1
+      
+      count += defaultFeedValue
+      feedResultText = "\(feedCase.name)을 \(defaultFeedValue)개 먹였어요!"
       return
     }
     
